@@ -1,17 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { WEEKS, WEEK_NAMES } from "@/features/utils/days";
+import { TRASH_SCHEDULE1 } from "@/features/utils/trash-schedule";
 
 const ApDays = () => {
-  const daysOfWeek = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
   const today = new Date().getDay();
   const [selectedTab, setSelectedTab] = useState(today);
 
@@ -22,13 +15,23 @@ const ApDays = () => {
   return (
     <Box>
       <Tabs value={selectedTab} centered>
-        {daysOfWeek.map((day, index) => (
-          <Tab key={index} label={day} onClick={() => handleTabClick(index)} />
+        {WEEKS.map((day, index) => (
+          <Tab
+            key={index}
+            label={`${WEEK_NAMES[day]}曜日`}
+            onClick={() => handleTabClick(index)}
+          />
         ))}
       </Tabs>
       <Box textAlign="center" mt={2}>
-        <Typography variant="h4">{daysOfWeek[selectedTab]}</Typography>
-        <Typography variant="h6">HOGE</Typography>
+        <Typography variant="h4">{WEEKS[selectedTab]}</Typography>
+        {TRASH_SCHEDULE1[WEEKS[selectedTab]] ? (
+          <Typography variant="h6">
+            {TRASH_SCHEDULE1[WEEKS[selectedTab]]?.name}
+          </Typography>
+        ) : (
+          <Typography variant="h6">今日はゴミの日ではありません</Typography>
+        )}
       </Box>
     </Box>
   );

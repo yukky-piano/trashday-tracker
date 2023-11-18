@@ -1,0 +1,18 @@
+{
+  "monday": {
+    "id": "can",
+    "name": "缶"
+  },
+  "tuesday": {
+    "id": "burnable",
+    "name": "燃えるごみ"
+  },
+  "wednesday": {
+    "id": "pet",
+    "name": "ペットボトル"
+  },
+  "friday": {
+    "id": "burnable",
+    "name": "燃えるごみ"
+  }
+}
