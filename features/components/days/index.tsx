@@ -1,8 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { Box, Tab, Tabs, Typography } from "@mui/material";
-import { WEEKS, WEEK_NAMES } from "@/features/utils/days";
-import { TRASH_SCHEDULE1 } from "@/features/utils/trash-schedule";
+import { Box, Grid, Tab, Tabs, Typography } from "@mui/material";
+import {
+  TRASH_SCHEDULE1,
+  WEEKS,
+  WEEK_NAMES,
+  useWeeklyTrash,
+} from "@/features/hooks/weekly-trash";
+import ApDay from "./day";
 
 const ApDays = () => {
   const today = new Date().getDay();
@@ -23,16 +28,14 @@ const ApDays = () => {
           />
         ))}
       </Tabs>
-      <Box textAlign="center" mt={2}>
-        <Typography variant="h4">{WEEKS[selectedTab]}</Typography>
-        {TRASH_SCHEDULE1[WEEKS[selectedTab]] ? (
-          <Typography variant="h6">
-            {TRASH_SCHEDULE1[WEEKS[selectedTab]]?.name}
-          </Typography>
-        ) : (
-          <Typography variant="h6">今日はゴミの日ではありません</Typography>
-        )}
-      </Box>
+      <Grid container direction="row" justifyContent="space-around" spacing={4}>
+        <Grid item xs={12} md={6}>
+          <ApDay weekDay={WEEKS[selectedTab % 7]} />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <ApDay weekDay={WEEKS[(selectedTab + 1) % 7]} />
+        </Grid>
+      </Grid>
     </Box>
   );
 };
