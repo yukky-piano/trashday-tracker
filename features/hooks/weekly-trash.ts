@@ -69,7 +69,7 @@ export const useWeeklyTrash = () => {
     const diffInMs =
       currentDate.getTime() - new Date(BASE_DATE.getTime()).getTime();
     const weeks = Math.floor(diffInMs / msPerWeek);
-    const currentWeekType = weeks % 2 === 1 ? "even" : "odd";
+    const currentWeekType = weeks % 2 === 0 ? "even" : "odd";
     setWeek(currentWeekType);
   }, []);
 
