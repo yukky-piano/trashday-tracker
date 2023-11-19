@@ -1,12 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { Box, Grid, Tab, Tabs, Typography } from "@mui/material";
-import {
-  TRASH_SCHEDULE1,
-  WEEKS,
-  WEEK_NAMES,
-  useWeeklyTrash,
-} from "@/features/hooks/weekly-trash";
+import { Box, Grid, Tab, Tabs } from "@mui/material";
+import { WEEKS, WEEK_NAMES } from "@/features/hooks/weekly-trash";
 import ApDay from "./day";
 
 const ApDays = () => {
