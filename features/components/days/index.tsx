@@ -22,6 +22,8 @@ const ApTrash = ({ weekday }: { weekday: number }) => {
   const todaySize: DaySize = isTodayLarge ? "lg" : isNextDayLarge ? "sm" : "md";
   const nextSize: DaySize = isNextDayLarge ? "lg" : isTodayLarge ? "sm" : "md";
 
+  const showNext = diffWeekday < 0;
+
   return (
     <Grid container direction="row" justifyContent="space-around" spacing={4}>
       {diffWeekday === 0 && (
@@ -30,10 +32,18 @@ const ApTrash = ({ weekday }: { weekday: number }) => {
         </Grid>
       )}
       <Grid item xs={12} md={gridSize[todaySize]}>
-        <ApDay weekDay={WEEKS[weekday % 7]} size={todaySize} />
+        <ApDay
+          weekDay={WEEKS[weekday % 7]}
+          size={todaySize}
+          showNext={showNext}
+        />
       </Grid>
       <Grid item xs={12} md={gridSize[nextSize]}>
-        <ApDay weekDay={WEEKS[(weekday + 1) % 7]} size={nextSize} />
+        <ApDay
+          weekDay={WEEKS[(weekday + 1) % 7]}
+          size={nextSize}
+          showNext={showNext}
+        />
       </Grid>
     </Grid>
   );

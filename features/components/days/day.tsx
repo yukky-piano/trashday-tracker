@@ -10,13 +10,16 @@ export type DaySize = "sm" | "md" | "lg";
 
 const ApDay = ({
   weekDay,
+  showNext,
   size = "md",
 }: {
   weekDay: WeekDay;
+  showNext: boolean;
   size?: DaySize;
 }) => {
-  const [trashSchedule, _] = useWeeklyTrash();
+  const [thisTrashSchedule, nextTrashSchedule] = useWeeklyTrash();
 
+  const trashSchedule = showNext ? nextTrashSchedule : thisTrashSchedule;
   const formattedName = trashSchedule[weekDay]?.name?.split("・");
 
   return (
