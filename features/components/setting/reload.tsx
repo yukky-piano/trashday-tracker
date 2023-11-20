@@ -17,10 +17,12 @@ const ApReload: React.FC = () => {
         right: "20px",
         bottom: "20px",
         color: blueGrey[200],
+        borderRadius: "5rem",
       }}
       onClick={handleReload}
     >
       <Autorenew />
+      今日のごみを表示
     </Button>
   );
 };
