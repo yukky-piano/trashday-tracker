@@ -1,11 +1,11 @@
-import ApDays from "@/features/components/days";
+import ApTrashDay from "@/features/components/trash-day";
 import ApHeader from "@/features/components/header";
 
 export default function Home() {
   return (
     <main>
       <ApHeader />
-      <ApDays />
+      <ApTrashDay />
     </main>
   );
 }
