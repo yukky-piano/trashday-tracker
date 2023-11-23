@@ -65,16 +65,28 @@ const ApTrash = ({ weekday }: { weekday: number }) => {
   const todayWeekday = today.getDay();
   const diffWeekday = weekday - todayWeekday;
 
-  const isNextLarge = useMemo(() => {
-    const isMorning = today.getHours() <= 8;
-    return diffWeekday === 0 && !isMorning;
-  }, [diffWeekday, today]);
+  const isToday = diffWeekday === 0;
+  const isTomorrow = diffWeekday === 1;
+  const isMorning = today.getHours() <= 8;
+  const showTodayLarge = useMemo(
+    () => (isToday && isMorning) || (isTomorrow && !isMorning),
+    [isToday, isMorning, isTomorrow]
+  );
+  const showNextLarge = useMemo(
+    () => isToday && !isMorning,
+    [isToday, isMorning]
+  );
 
   const showNext = diffWeekday < 0;
 
   return (
-    <Grid container direction="row" justifyContent="space-around" spacing={4}>
-      <Grid item xs={12}>
+    <Grid
+      container
+      direction="column"
+      justifyContent="space-around"
+      spacing={2}
+    >
+      <Grid item>
         <Box textAlign="center" p="0.5rem">
           <Typography
             variant="caption"
@@ -94,23 +106,25 @@ const ApTrash = ({ weekday }: { weekday: number }) => {
           </Typography>
         </Box>
       </Grid>
-      <Grid item xs={12} md={isNextLarge ? 3 : 9}>
+      <Grid item>
         <ApDay
           weekDay={WEEKS[weekday % 7]}
           showNextSchedule={showNext}
-          isLargeSize={!isNextLarge}
+          isLargeSize={showTodayLarge}
         />
       </Grid>
-      <Grid item xs={12} md={isNextLarge ? 9 : 3}>
-        <Box textAlign="center">
-          <Typography variant="subtitle1">NEXT</Typography>
-        </Box>
-        <ApDay
-          weekDay={WEEKS[(weekday + 1) % 7]}
-          showNextSchedule={showNext}
-          isLargeSize={isNextLarge}
-        />
-      </Grid>
+      {isToday && (
+        <Grid item>
+          <Box textAlign="center">
+            <Typography variant="subtitle1">NEXT</Typography>
+          </Box>
+          <ApDay
+            weekDay={WEEKS[(weekday + 1) % 7]}
+            showNextSchedule={showNext}
+            isLargeSize={showNextLarge}
+          />
+        </Grid>
+      )}
     </Grid>
   );
 };
