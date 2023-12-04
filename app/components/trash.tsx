@@ -42,7 +42,7 @@ const ApDay = ({
             {formattedName?.map((name, index) => (
               <Box key={index} my="1rem">
                 <Typography
-                  variant={isLargeSize ? "h3" : "body2"}
+                  variant={isLargeSize ? "h3" : "h5"}
                   fontWeight={isLargeSize ? "bold" : "normal"}
                 >
                   {name}
