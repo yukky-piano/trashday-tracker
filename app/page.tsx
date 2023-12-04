@@ -1,4 +1,4 @@
-import ApTrashDay from "@/app/components";
+import ApTrashDay from "./components";
 import ApHeader from "@/features/components/header";
 
 export default function Home() {
