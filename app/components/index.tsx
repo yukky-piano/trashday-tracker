@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Box, Tab, Tabs } from "@mui/material";
 import { WEEKS, WEEK_NAMES } from "@/features/hooks/weekly-trash";
-import ApReload from "../../features/components/setting/reload";
+import ApReload from "@/features/components/setting/reload";
 import ApTrash from "./trash";
 
 const ApTrashDay = () => {
