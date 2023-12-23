@@ -27,34 +27,23 @@ const ApDay = ({
   showNextSchedule: boolean;
   isLargeSize: boolean;
 }) => {
-  const [thisTrashSchedule, nextTrashSchedule] = useWeeklyTrash();
+  const { trashInfo } = useWeeklyTrash();
 
-  const trashSchedule = showNextSchedule
-    ? nextTrashSchedule
-    : thisTrashSchedule;
-  const formattedName = trashSchedule[weekDay]?.name?.split("・");
+  const formattedName = trashInfo(weekDay, showNextSchedule)?.split("・");
 
   return (
     <Box textAlign="center">
       <Box sx={isLargeSize ? largeSx : smallSx}>
-        {trashSchedule[weekDay] ? (
-          <>
-            {formattedName?.map((name, index) => (
-              <Box key={index} my="1rem">
-                <Typography
-                  variant={isLargeSize ? "h3" : "h5"}
-                  fontWeight={isLargeSize ? "bold" : "normal"}
-                >
-                  {name}
-                </Typography>
-              </Box>
-            ))}
-          </>
-        ) : (
-          <Typography variant="h5" my="1rem">
-            ゴミの日ではありません
-          </Typography>
-        )}
+        {formattedName?.map((name, index) => (
+          <Box key={index} my="1rem">
+            <Typography
+              variant={isLargeSize ? "h3" : "h5"}
+              fontWeight={isLargeSize ? "bold" : "normal"}
+            >
+              {name}
+            </Typography>
+          </Box>
+        ))}
       </Box>
     </Box>
   );

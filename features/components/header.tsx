@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  AppBar,
-  Container,
-  Toolbar,
-  Typography,
-  IconButton,
-} from "@mui/material";
+import { AppBar, Container, Toolbar, IconButton } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -25,9 +19,6 @@ const ApHeader = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography variant="h6" style={{ fontWeight: "bold" }}>
-            トラッシュトラッカー
-          </Typography>
           <IconButton onClick={handleHomeClick}>
             <HomeIcon />
           </IconButton>

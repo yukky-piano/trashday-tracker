@@ -22,31 +22,24 @@ export const WEEK_NAMES: Record<WeekDay, string> = {
   sun: "日",
 };
 
-type TrashType = "can" | "pet" | "burnable" | "nonburnable" | "other";
-
-type TrashInfo = {
-  type: TrashType;
-  name: string;
-};
-
-type WeekSchedule = Record<WeekDay, TrashInfo | null>;
+type WeekSchedule = Record<WeekDay, string | null>;
 
 export const TRASH_SCHEDULE1: WeekSchedule = {
-  mon: { type: "can", name: "缶" },
-  tue: { type: "burnable", name: "燃えるごみ" },
-  wed: { type: "pet", name: "ペットボトル" },
+  mon: "缶",
+  tue: "燃えるごみ",
+  wed: "ペットボトル",
   thu: null,
-  fri: { type: "burnable", name: "燃えるごみ" },
+  fri: "燃えるごみ",
   sat: null,
   sun: null,
 };
 
 export const TRASH_SCHEDULE2: WeekSchedule = {
-  mon: { type: "other", name: "ビン・危険ごみ・古着類・白色トレイ" },
-  tue: { type: "burnable", name: "燃えるごみ" },
-  wed: { type: "nonburnable", name: "燃えないごみ・古紙類" },
+  mon: "ビン・危険ごみ・古着類・白色トレイ",
+  tue: "燃えるごみ",
+  wed: "燃えないごみ・古紙類",
   thu: null,
-  fri: { type: "burnable", name: "燃えるごみ" },
+  fri: "燃えるごみ",
   sat: null,
   sun: null,
 };
@@ -66,18 +59,27 @@ export const useWeeklyTrash = () => {
     const msPerDay = 1000 * 60 * 60 * 24;
     const msPerWeek = msPerDay * 7;
     const currentDate = new Date(new Date().getTime() + JST_OFFSET);
-    const diffInMs =
-      currentDate.getTime() - new Date(BASE_DATE.getTime()).getTime();
+    const diffInMs = currentDate.getTime() - BASE_DATE.getTime();
     const weeks = Math.floor(diffInMs / msPerWeek);
     const currentWeekType = weeks % 2 === 0 ? "even" : "odd";
     setWeek(currentWeekType);
   }, []);
 
-  const result: [WeekSchedule, WeekSchedule] = useMemo(() => {
-    return week === "even"
-      ? [TRASH_SCHEDULE1, TRASH_SCHEDULE2]
-      : [TRASH_SCHEDULE2, TRASH_SCHEDULE1];
+  const schedules: WeekSchedule[] = useMemo(() => {
+    const schedules = [TRASH_SCHEDULE1, TRASH_SCHEDULE2];
+    return week === "even" ? schedules : schedules.reverse();
   }, [week]);
 
-  return result;
+  return useMemo(
+    () => ({
+      schedules: schedules,
+      trashInfo: (weekDay: WeekDay, isNextWeek: boolean) => {
+        const schedule = isNextWeek ? schedules[1] : schedules[0];
+        return schedule[weekDay] !== null
+          ? schedule[weekDay]
+          : "ゴミの日ではありません";
+      },
+    }),
+    [schedules]
+  );
 };
