@@ -1,18 +1,19 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { AppBar, Container, Toolbar, IconButton } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 
 const ApHeader = () => {
+  const router = useRouter();
+
   const handleHomeClick = () => {
-    //history.push("/");
-    console.log("home押したよ");
+    router.push("/");
   };
 
   const handleSearchClick = () => {
-    //history.push("/search");
-    console.log("search押したよ");
+    router.push("/search");
   };
 
   return (
