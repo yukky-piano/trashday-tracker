@@ -1,3 +1,5 @@
+"use client";
+
 import { Autorenew } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { blueGrey } from "@mui/material/colors";

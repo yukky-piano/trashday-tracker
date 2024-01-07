@@ -66,7 +66,7 @@ export const useWeeklyTrash = () => {
   }, []);
 
   const schedules: WeekSchedule[] = useMemo(() => {
-    const schedules = [TRASH_SCHEDULE1, TRASH_SCHEDULE2];
+    const schedules = [TRASH_SCHEDULE2, TRASH_SCHEDULE1];
     return week === "even" ? schedules : schedules.reverse();
   }, [week]);
 
