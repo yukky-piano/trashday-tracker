@@ -74,7 +74,7 @@ export const useWeeklyTrash = () => {
     () => ({
       schedules: schedules,
       trashInfo: (weekDay: WeekDay, isNextWeek: boolean) => {
-        const schedule = isNextWeek ? schedules[1] : schedules[0];
+        const schedule = isNextWeek ? schedules[0] : schedules[1];
         return schedule[weekDay] !== null
           ? schedule[weekDay]
           : "ゴミの日ではありません";
