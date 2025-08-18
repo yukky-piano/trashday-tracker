@@ -102,7 +102,6 @@ const ApSearch = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell>品目</TableCell>
-                    <TableCell>読み方</TableCell>
                     <TableCell>分別区分</TableCell>
                     <TableCell>備考</TableCell>
                   </TableRow>
@@ -110,8 +109,14 @@ const ApSearch = () => {
                 <TableBody>
                   {filteredData.map((item, index) => (
                     <TableRow key={index}>
-                      <TableCell>{item.name}</TableCell>
-                      <TableCell>{item.reading}</TableCell>
+                      <TableCell>
+                        <Box sx={{ display: "flex", flexDirection: "column" }}>
+                          <Typography variant="caption" color="text.secondary">
+                            {item.reading}
+                          </Typography>
+                          <Typography variant="body1">{item.name}</Typography>
+                        </Box>
+                      </TableCell>
                       <TableCell>
                         <Typography
                           variant="body2"
